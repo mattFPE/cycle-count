@@ -8,9 +8,9 @@ const App = () => {
 
   return (
     <>
-      <ControlBar />
+      {/* <ControlBar /> */}
       {view.main && <Main />}
-      {view.create && <Create />}
+      {/* {view.create && <Create />} */}
     </>
   )
 }

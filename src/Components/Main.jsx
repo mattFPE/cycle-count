@@ -1,57 +1,40 @@
 import { useDispatch } from 'react-redux'
-import { Button, Stack, Typography } from '@mui/material'
-import { DataGrid } from '@mui/x-data-grid'
 import { useState } from 'react'
+import {Button} from 'primereact/button'
+import {FilterMatchMode} from 'primereact/api'
+import TableView from './DataTable'
 
-const openCycleColumns = [
-    {
-        field: 'open',
-        headerName: 'Open',
-        width: 100,
-        renderCell: (params) => <Button variant='contained' size='small' sx={{ backgroundColor: '#F17130' }}>Open</Button>
-    },
-    { field: 'count_name', headerName: 'Count Name', flex: 1 },
-    { field: 'created', headerName: 'Date Created', flex: 1 },
-    { field: 'description', headerName: 'Discription', flex: 1 },
-    { field: 'status', headerName: 'Status', flex: 1 }
+const columns = [
+    {field: 'date', header: 'Date', filter: true},
+    {field: 'name', header: 'Name', filter: true}
 ]
 
-const approveCycleColumns = [
-    {
-        field: 'open',
-        headerName: 'Open',
-        width: 100,
-        renderCell: (params) => <Button variant='contained' size='small' sx={{ backgroundColor: '#F17130' }}>Open</Button>
-    },
-    { field: 'count_name', headerName: 'Count Name', flex: 1 },
-    { field: 'counted', headerName: 'Date Counted', flex: 1 },
-    { field: 'description', headerName: 'Discription', flex: 1 },
-    { field: 'status', headerName: 'Status', flex: 1 }
+const dataSet = [
+    {date: '11/02/2022', name: 'Matt', id: 0},
+    {date: '11/25/2022', name: 'Matt', id: 1},
+    {date: '12/02/2022', name: 'Jill', id: 2}
 ]
 
-const testOpenRows = [{ id: 0, count_name: 'Test Cycle-1', created: new Date().toLocaleDateString(), description: 'Turbos', status: 'Not Started' }]
-const testApproveRows = [{ id: 0, count_name: 'Test Cycle-2', counted: new Date().toLocaleDateString(), description: 'Turbos', status: 'Pending Acct Approval' }]
+const filters = {
+    date: {value: null, matchMode: FilterMatchMode.EQUALS},
+    name: {value: null, matchMode: FilterMatchMode.EQUALS}
+}
 
 const Main = () => {
     const dispatch = useDispatch()
-    const [openRows, setOpenRows] = useState(testOpenRows)
-    const [approveRows, setApproveRows] = useState(testApproveRows)
 
     return (
-        <Stack height={'100vh'} spacing={3} marginTop={2}>
-            <Typography marginBottom={0} fontWeight={'bold'}>Open Cycle Counts</Typography>
-            <DataGrid
-                columns={openCycleColumns}
-                rows={openRows}
-                loading={openRows.length === 0}
-            />
-            <Typography fontWeight={'bold'}>Cycle Counts Needing Approval</Typography>
-            <DataGrid
-                columns={approveCycleColumns}
-                rows={approveRows}
-                loading={approveRows.length === 0}
-            />
-        </Stack>
+        <div className='grid'>
+            <section className='col-12'>
+                <Button>New Cycle Count</Button>
+            </section>
+            <section className='col-12'>
+                <TableView data={dataSet} columns={columns} tableFilters={filters} />
+            </section>
+            <section className='col-12'>
+                <h1>3</h1>
+            </section>
+        </div>
     )
 }
 
