@@ -1,31 +1,70 @@
-const Create = () => {
+import {Panel} from 'primereact/panel'
+import {InputText} from 'primereact/inputtext'
+import {Divider} from 'primereact/divider'
+import TableView from './DataTable'
+
+const tableHeader = (
+    <div className='table-header flex flex-column'>
+        <section>Adjustments</section>
+        <Divider className='mb-5' />
+        <section className='flex justify-content-evenly'>
+            <span className='p-float-label'>
+                <InputText id="itemFilter" />
+                <label htmlFor='itemFilter'>Item</label>
+            </span>
+            <span className='p-float-label'>
+                <InputText id="itemFilter" />
+                <label htmlFor='itemFilter'>Item</label>
+            </span>
+            <span className='p-float-label'>
+                <InputText id="itemFilter" />
+                <label htmlFor='itemFilter'>Item</label>
+            </span>
+            <span className='p-float-label'>
+                <InputText id="itemFilter" />
+                <label htmlFor='itemFilter'>Item</label>
+            </span>
+            <span className='p-float-label'>
+                <InputText id="itemFilter" />
+                <label htmlFor='itemFilter'>Item</label>
+            </span>
+        </section>
+    </div>
+)
+
+const countsTable = {
+    tableName: 'Adjustments',
+    emptyMessage: 'No Items to Display',
+    filterDisplayType: 'row',
+    customHeader: tableHeader,
+    columns: [
+        {field: 'item', header: 'Item', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'description', header: 'Description', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'unit', header: 'Units', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'qtyOnHand', header: 'Qty On Hand', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'onHandValue', header: 'On Hand Value', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'newQty', header: 'New Qty', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'newValue', header: 'New Value', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'change', header: '% Change', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'class', header: 'Class', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'subclass', header: 'Subclass', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'storedMultiLoc', header: 'Stored Multi. Loc.', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'lastCount', header: 'Last Count', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'lastAdjust', header: 'Last Adjusted', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}},
+        {field: 'serianlNumbers', header: 'Active S/N', filter: false, headerStyle: {fontSize: '10px'}, bodyStyle: {fontSize: '10px'}}
+    ]
+}
+
+const testData = [
+    {id: 0, item: 'Turbo', description: 'A turbocharger'}
+]
+
+const Create = () => {    
     return (
-        <h1>HI!!</h1>
-        // <Stack spacing={2.5} mt={2}>
-        //     <Card variant="outlined">
-        //         <CardHeader title="Primary Information" />
-        //         <CardContent>
-        //             <TextField sx={{marginRight: 3}} variant="filled" disabled id="documentnumber" label="Reference #" defaultValue="To Be Generated" />
-        //             <TextField sx={{marginRight: 3}} variant="filled" id="date" label="Date" defaultValue={new Date().toLocaleDateString()} />
-        //             <TextField sx={{marginRight: 3}} variant="filled" id="time" label="Time" defaultValue={new Date().toLocaleTimeString()} />
-        //             <TextField sx={{marginRight: 3}} variant="filled" id="description" label="Description" />
-        //             <TextField sx={{marginTop: 3}} variant="filled" id="notes" label="Notes" fullWidth multiline rows={4} />
-        //         </CardContent>
-        //     </Card>
-        //     <Card variant="outlined">
-        //         <CardHeader title="Counts" />
-        //         <CardContent sx={{ height: 800 }} >
-        //             <DataGrid
-        //                 columns={columns}
-        //                 rows={testData}
-        //                 loading={testData.length === 0}
-        //                 sx={{ fontSize: '11px' }}
-        //                 experimentalFeatures={{ newEditingApi: true }}
-        //                 components={{ Toolbar: GridToolbar }}
-        //             />
-        //         </CardContent>
-        //     </Card>
-        // </Stack>
+        <div>
+            <Panel header='Primamry Information'></Panel>
+            <TableView data={testData} tableDefinition={countsTable} />
+        </div>
     )
 }
 

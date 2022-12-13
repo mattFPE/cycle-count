@@ -1,23 +1,30 @@
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
-import {Button} from 'primereact/button'
-import {FilterMatchMode} from 'primereact/api'
+import { Button } from 'primereact/button'
+import { FilterMatchMode } from 'primereact/api'
 import TableView from './DataTable'
 
-const columns = [
-    {field: 'date', header: 'Date', filter: true},
-    {field: 'name', header: 'Name', filter: true}
-]
+const openCycleCountsTable = {
+    tableName: 'Open Cycle Counts',
+    emptyMessage: 'No cycle counts to complete at this time',
+    filterDisplayType: 'menu',
+    columns: [
+        { field: 'document', header: 'Document #', filter: true },
+        { field: 'createddate', header: 'Date Created', filter: true },
+        { field: 'status', header: 'Status', filter: true }
+    ]
+}
 
-const dataSet = [
-    {date: '11/02/2022', name: 'Matt', id: 0},
-    {date: '11/25/2022', name: 'Matt', id: 1},
-    {date: '12/02/2022', name: 'Jill', id: 2}
-]
-
-const filters = {
-    date: {value: null, matchMode: FilterMatchMode.EQUALS},
-    name: {value: null, matchMode: FilterMatchMode.EQUALS}
+const approvalCycleCountTable = {
+    tableName: 'Cycle Counts Needing Accounting Approval',
+    emptyMessage: 'No cycle counts to approve at this time',
+    filterDisplayType: 'menu',
+    columns: [
+        { field: 'document', header: 'Document #', filter: true },
+        { field: 'datecounted', header: 'Date Counted', filter: true },
+        { field: 'timecounted', header: 'Time Counted', filter: true },
+        { field: 'status', header: 'Status', filter: true }
+    ]
 }
 
 const Main = () => {
@@ -25,14 +32,11 @@ const Main = () => {
 
     return (
         <div className='grid'>
-            <section className='col-12'>
-                <Button>New Cycle Count</Button>
+            <section className='col-12 mt-5'>
+                <TableView data={[]} tableDefinition={openCycleCountsTable} />
             </section>
-            <section className='col-12'>
-                <TableView data={dataSet} columns={columns} tableFilters={filters} />
-            </section>
-            <section className='col-12'>
-                <h1>3</h1>
+            <section className='col-12 mt-5'>
+                <TableView data={[]} tableDefinition={approvalCycleCountTable} />
             </section>
         </div>
     )
